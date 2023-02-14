@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static "css/signUp.css" %}" />
+        <title>Sign up</title>
+        <style>
+            .container{
+               background-image: url('{% static "images/background.jpg" %}');
+               background-size:100% 100%;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <form action="" class="form" method="post">
+                <h1 class="title">Sign up</h1>
+                {% csrf_token %}
+                {{signUpForm}}
+                <label for="confirm-valid" class="label-check">
+                    <input type="checkbox" id="confirm-valid" required> I've checked the correctness of the entered data
+                </label>
+                <label for="confirm-agreement" class="label-check">
+                    <input type="checkbox" id="confirm-agreement" required> I agree with the user agreement
+                </label>
+                <button class="form-button" type="submit">Sign up</button>
+            </form>
+        </div>
+    </body>
+</html>

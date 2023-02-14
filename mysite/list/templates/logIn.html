@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static "css/login.css" %}" />
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="icon" href="data:;base64,=">
+        <title>To do list</title>
+        <style>
+            .container{
+               background-image: url('{% static "images/background.jpg" %}');
+               background-size:100% 100%;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <form action="" class="form" method="post">
+                {% csrf_token %}
+                <h1 class="title">Log in</h1>
+                {{form.as_table}}
+                <label class="label-checkbox" for="rememberMe">
+                    <input type="checkbox" name="rememberMe" class="form-check">
+                    Remember me
+                </label>
+                <div class="wrapper">
+                    <button type="submit" class="form-butn">Log in</button>
+                    <a class="form-signUp" href="/signUp">Sign Up</a>
+                </div>
+                <div class="div-social">
+                    <span>Войти с помощью</span>
+                </div>
+                <ul class="list">
+                    <li class="social">
+                        <a href="" class="social-btn">
+                            <img class="login" src="{% static "images/google.svg" %}" alt="google">
+                        </a>
+                    </li>
+                    <li class="social">
+                        <a href="" class="social-btn">
+                            <img class="login" src="{% static "images/tg.svg" %}" alt="telegram">
+                        </a>
+                    </li>
+                    <li class="social">
+                        <a href="" class="social-btn">
+                            <img class="login" src="{% static "images/vk.svg" %}" alt="vk">
+                        </a>
+                    </li>
+                    <li class="social">
+                        <a href="" class="social-btn">
+                            <img class="login" src="{% static "images/yandex.svg" %}" alt="yandex">
+                        </a>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </body>
+</html>

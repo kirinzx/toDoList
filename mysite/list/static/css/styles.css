@@ -1,0 +1,231 @@
+*,
+*:before,
+*:after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 23px;
+    width: 100%;
+    max-width: 450px;
+    margin: auto;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+}
+
+#newTask {
+    position: relative;
+    padding: 20px 20px;
+}
+
+#newTask input {
+    width: 75%;
+    height: 45px;
+    padding: 12px;
+    color: #111111;
+    font-weight: 500;
+    position: relative;
+    border-radius: 5px;
+    font-size: 15px;
+    border: 2px solid #d1d3d4;
+}
+
+
+#newtask input:focus {
+    outline: none;
+    border-color: #0d75ec;
+}
+
+#newTask button {
+    position: relative;
+    float: right;
+    font-weight: 500;
+    font-size: 16px;
+    background-color: #0d75ec;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    outline: none;
+    width: 20%;
+    height: 45px;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+}
+
+#tasks {
+    border-radius: 10px;
+    width: 100%;
+    position: relative;
+    background-color: #ffffff;
+    padding: 5px 20px;
+    margin-top: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 300px;
+    min-height: 50px;
+}
+
+.task {
+    border-radius: 5px;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #939697;
+    cursor: pointer;
+    background-color: #c5e1e6;
+    margin-bottom: 8px;
+    padding: 15px 45px 15px 10px;
+    display: flex;
+    position: relative;
+}
+
+.task span {
+    font-size: 15px;
+    font-weight: 400;
+    overflow-wrap: break-word;
+}
+
+.task button {
+    background-color: #6583e5;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 7px;
+    border-radius: 5px;
+    position: absolute;
+    right: 10px;
+}
+
+
+#message {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+
+
+.menu-content {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    max-width: 50px;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(-105%);
+    transition: all 0.2s ease-in-out;
+    z-index: 1;
+    opacity: 0;
+}
+
+.profile img {
+    width: 50px;
+    height: 50px;
+}
+
+.settings img {
+    width: 50px;
+    height: 50px;
+}
+
+.menu-burger {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.menu-burger::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transform: translateY(-105%);
+    transition: transform 0.2s ease-in-out;
+    background-color: white;
+}
+
+.menu-content-active {
+    opacity: 1;
+}
+
+.menu-content-active,
+.menu-burger-active::before {
+    transform: translateY(0);
+}
+
+.menu-burger-active .burger {
+    color: black;
+}
+
+.burger {
+    --burger-width: 40px;
+    --burger-height: 30px;
+    --burger-line-height: 4px;
+    position: relative;
+    z-index: 6;
+    border: none;
+    padding: 0;
+    width: var(--burger-width);
+    height: var(--burger-height);
+    color: white;
+    background-color: transparent;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+
+.burger::before,
+.burger::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: var(--burger-line-height);
+    background-color: currentColor;
+    transition: transform 0.3s ease-in-out, top 0.3s ease-in-out;
+}
+
+.burger::before {
+    top: 0;
+}
+
+.burger::after {
+    top: calc(100% - var(--burger-line-height));
+}
+
+.burger__line {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: var(--burger-line-height);
+    background-color: currentColor;
+    transform: translateY(-50%);
+    transition: transform 0.3s ease-in-out;
+}
