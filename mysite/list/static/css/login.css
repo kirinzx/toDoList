@@ -31,18 +31,19 @@ body {
     height: 45px;
     padding: 20px;
     margin: 5px;
+    font-size: medium;
 }
 
-.form-check{
+.form-check {
     position: relative;
     margin: 6px;
 }
 
-.form h1{
+.form h1 {
     margin: 5px;
 }
 
-.form label:not(.label-checkbox){
+.form label:not(.label-checkbox) {
     display: none;
 }
 
@@ -99,7 +100,7 @@ body {
     margin-right: 12px;
 }
 
-.social{
+.social {
     padding: 0;
 }
 
@@ -125,6 +126,20 @@ body {
     font-size: 16px;
 }
 
-.social-btn{
+.social-btn {
     padding: 0;
+}
+
+.message {
+    padding: 1px 0px 5px;
+    border-radius: 5px;
+    margin: 0px 5px;
+}
+
+.message-error {
+    color: red;
+}
+
+.message-success {
+    color: green;
 }

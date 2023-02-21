@@ -18,13 +18,23 @@
             <form action="" class="form" method="post">
                 <h1 class="title">Sign up</h1>
                 {% csrf_token %}
-                {{signUpForm}}
+                {{ form.non_field_errors }}
+                {% for field in form %}
+                    {{ field }}
+                {% endfor %}
                 <label for="confirm-valid" class="label-check">
                     <input type="checkbox" id="confirm-valid" required> I've checked the correctness of the entered data
                 </label>
                 <label for="confirm-agreement" class="label-check">
                     <input type="checkbox" id="confirm-agreement" required> I agree with the user agreement
                 </label>
+                {% if messages %}
+                    <div class="non-field-errors">
+                        {% for message in messages %}
+                            <span class="form-error">{{ message }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
                 <button class="form-button" type="submit">Sign up</button>
             </form>
         </div>
