@@ -66,3 +66,8 @@ body {
 .title{
     margin: 0 4px 10px;
 }
+
+.message-error{
+    color: red;
+    padding: 0px 5px 10px;
+}

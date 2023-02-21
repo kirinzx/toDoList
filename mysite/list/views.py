@@ -11,7 +11,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 
 def login(request):
     logInForm = LogInForm()
-    if request.method == 'POST':    
+    if request.method == 'POST':
         form = LogInForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
@@ -24,7 +24,8 @@ def login(request):
                 messages.error(request, "Invalid login or password")
                 return render(request, 'logIn.html', {"form": form})
         else:
-            return render(request, 'logIn.html', {"form": logInForm})
+            logInForm = LogInForm()
+            return render(request, 'logIn.html', {"form": form})
     else:
         return render(request, 'logIn.html', {"form": logInForm})
 

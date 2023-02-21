@@ -20,11 +20,11 @@ from django.conf import settings
 from django.views.generic import TemplateView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name='admin'),
     re_path(r'^login', views.login, name='login'),
-    path('profile', views.profile),
+    path('profile', views.profile, name='profile'),
     path('', views.toDoList, name='home'),
-    path('signUp', views.signUp),
+    path('signUp', views.signUp, name='signUp'),
     path('logout', views.logout_view, name='logout'),
 ]
 

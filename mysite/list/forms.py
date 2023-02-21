@@ -17,7 +17,7 @@ class SignUpForm(ModelForm):
         attrs={"placeholder": "Password"}), min_length=8)
     password2 = forms.CharField(
         label='Confirm password', widget=forms.PasswordInput(attrs={"placeholder": "Confirm password"}), min_length=8)
-
+    error_css_class = 'message-error'
     class Meta:
         model = User
         fields = ('username', 'email', 'phoneNumber', 'password')
@@ -49,17 +49,16 @@ class SignUpForm(ModelForm):
         if password and confirm_password:
             if password != confirm_password:
                 self.add_error(None, "Passwords don't match")
+        ifNums = False
+        ifLets = False
+        for letter in password:
+            if letter.isalpha():
+                ifLets = True
+            if letter.isdigit():
+                ifNums = True
+            if ifNums == True and ifLets == True:
+                break
+        if ifNums == False or ifLets == False:
+            self.add_error("password","Your password must contain at least one digit and one letter!")  
         return cleaned_data
 
-    def checkIfExist(self):
-        cleaned_data = super(SignUpForm, self).clean()
-        username = self.cleaned_data.get("username")
-        email = self.cleaned_data.get("email")
-        phoneNumber = self.cleaned_data.get("phoneNumber")
-        if User.objects.filter(email.exists()):
-            self.add_error('email', "That email already exists")
-        if User.objects.filter(username.exists()):
-            self.add_error('username', "That username already exists")
-        if User.objects.filter(phoneNumber.exists()):
-            self.add_error('phoneNumber', "That phone number already exists")
-        return cleaned_data
