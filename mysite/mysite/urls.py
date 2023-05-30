@@ -15,17 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path, include
-from list import views
 from django.conf import settings
 from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
-    re_path(r'^login', views.login, name='login'),
-    path('profile', views.profile, name='profile'),
-    path('', views.toDoList, name='home'),
-    path('signUp', views.signUp, name='signUp'),
-    path('logout', views.logout_view, name='logout'),
+    path('',include('apps.authentication.urls')),
+    path('',include('apps.socials.urls')),
+    path('',include('apps.toDoList.urls')),
+    path('',include('apps.userProfile.urls')),
 ]
 
 
