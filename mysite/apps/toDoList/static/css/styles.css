@@ -75,7 +75,7 @@ body {
 }
 
 #tasks {
-    border-radius: 10px;
+    border-radius: 23px;
     width: 100%;
     position: relative;
     background-color: #ffffff;
@@ -107,7 +107,7 @@ body {
 }
 
 .task button {
-    background-color: #6583e5;
+    background-color: red;
     color: #ffffff;
     border: none;
     cursor: pointer;
@@ -144,6 +144,7 @@ body {
     width: 50px;
     height: 50px;
 }
+
 .visually-hidden {
     position: absolute;
     width: 1px;
@@ -153,7 +154,7 @@ body {
     overflow: hidden;
     border: 0;
     clip: rect(0 0 0 0);
-  }
+}
 
 .settings img {
     width: 50px;
@@ -243,4 +244,65 @@ body {
     background-color: currentColor;
     transform: translateY(-50%);
     transition: transform 0.3s ease-in-out;
+}
+
+.lds-circle {
+    display: inline-block;
+    transform: translateZ(1px);
+}
+
+.lds-circle>div {
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border-radius: 50%;
+    background: #fff;
+    animation: lds-circle 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+@keyframes lds-circle {
+
+    0%,
+    100% {
+        animation-timing-function: cubic-bezier(0.5, 0, 1, 0.5);
+    }
+
+    0% {
+        transform: rotateY(0deg);
+    }
+
+    50% {
+        transform: rotateY(1800deg);
+        animation-timing-function: cubic-bezier(0, 0.5, 0.5, 1);
+    }
+
+    100% {
+        transform: rotateY(3600deg);
+    }
+}
+
+.preloader {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+    background: hsla(254, 68%, 9%, 1);
+    background: linear-gradient(90deg, hsla(254, 68%, 9%, 1) 0%, hsla(320, 57%, 77%, 1) 25%, hsla(269, 97%, 37%, 1) 72%, hsla(316, 41%, 93%, 1) 100%);
+    background: -moz-linear-gradient(90deg, hsla(254, 68%, 9%, 1) 0%, hsla(320, 57%, 77%, 1) 25%, hsla(269, 97%, 37%, 1) 72%, hsla(316, 41%, 93%, 1) 100%);
+    background: -webkit-linear-gradient(90deg, hsla(254, 68%, 9%, 1) 0%, hsla(320, 57%, 77%, 1) 25%, hsla(269, 97%, 37%, 1) 72%, hsla(316, 41%, 93%, 1) 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#0E0725", endColorstr="#E6A3D0", GradientType=1);
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.preloader__done {
+    opacity: 0;
+    visibility: hidden;
 }

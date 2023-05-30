@@ -1,6 +1,25 @@
 const user_id = Number(document.querySelector('.visually-hidden').innerHTML)
-var user_token = ''
+const token = getToken();
 
+function getToken() {
+    function getCookie(name) {
+        var cookieValue = null;
+
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    return getCookie('csrftoken');
+}
 
 
 document.querySelector('#push').onclick = function () {
@@ -10,25 +29,27 @@ document.querySelector('#push').onclick = function () {
     }
     else {
         axios.post('/api/user/task', {
-            "user": user_id,
+            "user_id": user_id,
             "task": task,
-        },{
+        }, {
             headers: {
-                "Authorization" : `Token ${user_token}`
+                "X-CSRFToken": token
             }
         })
         .then(function (response) {
             document.querySelector('#tasks').innerHTML += `
-                <div class="task">
-                    <span id="taskname">
-                        ${response.data.task}
-                    </span>
-                    <button onclick="removeNote(this)" type="button" id="delete"></button>
-                </div>
-            `;
+            <div data-task="${response.data.id}" class="task">
+                <span id="taskname">
+                    ${response.data.task}
+                </span>
+                <button onclick="removeNote(this)" type="button" id="delete">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+            </div>
+        `;
         })
         .catch(function (error) {
-                console.error(error);
+            console.error(error);
         })
 
         document.getElementById("textInput").value = "";
@@ -38,21 +59,32 @@ document.querySelector('#push').onclick = function () {
     }
 }
 
-function getToken(){
-    axios.get(`/api/user/${user_id}/token`, {})
-
-    .then(function (response) {
-        user_token = response.data.key
-    })
-    .catch(function (error) {
-        console.error(error);
-    })
-}
-
 function removeNote(btn) {
 
-    if (btn) btn.parentNode.remove();
+    if (btn) {
+        const taskId = btn.parentNode.getAttribute("data-task")
+        axios.delete(`/api/user/task/${taskId}`, {
+            headers: {
+                "X-CSRFToken": token
+            }
+        })
+        .then(function (response) {
+            btn.parentNode.remove()
+            noNotes();
+        })
+        .catch(function (error) {
+            console.error(error);
+        })
+    }
+    noNotes();
+}
 
+
+window.onload = function (e) {
+    removeNote();
+}
+
+function noNotes(){
     const all_tasks = document.querySelectorAll('#delete');
     if (all_tasks.length == 0) {
         document.querySelector('#tasks').innerHTML += `
@@ -65,12 +97,6 @@ function removeNote(btn) {
     }
 }
 
-
-window.onload = function (e) {
-    removeNote();
-    getToken();
-}
-
 const btn = document.querySelector(".menu-burger")
 
 btn.addEventListener('click', function () {
@@ -78,3 +104,31 @@ btn.addEventListener('click', function () {
     menu.classList.toggle("menu-content-active")
     btn.classList.toggle("menu-burger-active")
 })
+
+const preloader = document.querySelector('.preloader');
+const images = document.images;
+const imagesTotal = images.length;
+let imagesLoaded = 0;
+
+if (preloader) {
+    if (imagesTotal > 0) {
+        for (let i = 0; i < imagesTotal; i++) {
+            let imageClone = new Image();
+            imageClone.onload = imageLoaded;
+            imageClone.onerror = imageLoaded;
+            imageClone.src = images[i].src;
+        }
+    } else imageLoaded();
+
+    function imageLoaded() {
+        imagesLoaded++;
+
+        if (imagesLoaded >= imagesTotal) {
+            setTimeout(function () {
+                if (!preloader.classList.contains('preloader__done')) {
+                    preloader.classList.add('preloader__done');
+                }
+            }, 1200)
+        }
+    }
+}

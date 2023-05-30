@@ -8,8 +8,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{% static "css/styles.css" %}" />
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://kit.fontawesome.com/46c7f6a5f8.js" crossorigin="anonymous"></script>
         <link rel="icon" href="data:;base64,=">
         <title>to doList</title>
         <style>
@@ -18,11 +17,14 @@
                background-size:100% 100%;
             }
         </style>
+        <link rel="preload" as="image" href="{% static "images/background.jpg" %}">
     </head>
 
     <body>
+        <div class="preloader">
+            <div class="lds-circle"><div></div></div>
+        </div>
         <div class="container">
-            {% if user.is_authenticated %}
             <div class="menu">
                 <div class="menu-burger">
                     <button class="burger" aria-label="Открыть меню"
@@ -50,17 +52,17 @@
                 </div>
                 <div id="tasks">
                     {% for task in userTasks %}
-                        <div class="task">
+                        <div data-task="{{task.id}}" class="task">
                             <span id="taskname">
-                                {{task}}
+                                {{task.task}}
                             </span>
-                            <button onclick="removeNote(this)" type="button" id="delete"></button>
+                            <button onclick="removeNote(this)" type="button" id="delete" ><i class="fa-solid fa-trash"></i></button>
                         </div>
                     {% endfor %}
                 </div>
             </div>
         </div>
-        {% endif %}
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
         <script type="text/javascript" src={% static "js/script.js" %}></script>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     </body>
