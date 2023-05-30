@@ -1,17 +1,35 @@
+const user_id = Number(document.querySelector('.visually-hidden').innerHTML)
+var user_token = ''
+
+
+
 document.querySelector('#push').onclick = function () {
-    if (document.querySelector('#newTask input').value.length == 0) {
-        alert("No way, man... YOU CANT ENTER EMPTY NOTE!!!!")
+    const task = document.querySelector('#newTask input').value
+    if (task.length == 0) {
+        alert("You can't enter empty task")
     }
     else {
-
-        document.querySelector('#tasks').innerHTML += `
-            <div class="task">
-                <span id="taskname">
-                    ${document.querySelector('#newTask input').value}
-                </span>
-                <button onclick="removeNote(this)" type="button" id="delete"></button>
-            </div>
-        `;
+        axios.post('/api/user/task', {
+            "user": user_id,
+            "task": task,
+        },{
+            headers: {
+                "Authorization" : `Token ${user_token}`
+            }
+        })
+        .then(function (response) {
+            document.querySelector('#tasks').innerHTML += `
+                <div class="task">
+                    <span id="taskname">
+                        ${response.data.task}
+                    </span>
+                    <button onclick="removeNote(this)" type="button" id="delete"></button>
+                </div>
+            `;
+        })
+        .catch(function (error) {
+                console.error(error);
+        })
 
         document.getElementById("textInput").value = "";
         if (document.getElementById("message") != null) {
@@ -19,6 +37,18 @@ document.querySelector('#push').onclick = function () {
         }
     }
 }
+
+function getToken(){
+    axios.get(`/api/user/${user_id}/token`, {})
+
+    .then(function (response) {
+        user_token = response.data.key
+    })
+    .catch(function (error) {
+        console.error(error);
+    })
+}
+
 function removeNote(btn) {
 
     if (btn) btn.parentNode.remove();
@@ -38,6 +68,7 @@ function removeNote(btn) {
 
 window.onload = function (e) {
     removeNote();
+    getToken();
 }
 
 const btn = document.querySelector(".menu-burger")

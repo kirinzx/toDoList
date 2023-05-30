@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth import login as auth_login,authenticate, logout
+from django.contrib.auth import login as auth_login, authenticate, logout
 from .forms import LogInForm, SignUpForm
-
+from rest_framework import generics
+from rest_framework.authtoken.models import Token
+from .serializers import TokenSerializer
 
 
 def login(request):
@@ -27,8 +29,9 @@ def logout_view(request):
     logout(request)
     return redirect('login')
 
+
 def signUp(request):
-    
+
     if (request.method == 'POST'):
         form = SignUpForm(request.POST)
         if (form.is_valid()):
@@ -40,3 +43,8 @@ def signUp(request):
     else:
         form = SignUpForm()
     return render(request, 'signUp.html', {"form": form})
+
+class UserTokenView(generics.RetrieveAPIView):
+    queryset = Token.objects.all()
+    serializer_class = TokenSerializer
+    lookup_field = 'user_id'
