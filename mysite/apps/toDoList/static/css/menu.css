@@ -1,0 +1,105 @@
+.menu-content {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    max-width: 50px;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(-105%);
+    transition: all 0.2s ease-in-out;
+    z-index: 1;
+    opacity: 0;
+}
+.profile img {
+    width: 50px;
+    height: 50px;
+}
+.settings img {
+    width: 50px;
+    height: 50px;
+}
+
+.logOut img {
+    width: 50px;
+    height: 50px;
+}
+
+.menu-burger {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.menu-burger::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transform: translateY(-105%);
+    transition: transform 0.2s ease-in-out;
+    background-color: white;
+}
+
+.menu-content-active {
+    opacity: 1;
+}
+
+.menu-content-active,
+.menu-burger-active::before {
+    transform: translateY(0);
+}
+
+.menu-burger-active .burger {
+    color: black;
+}
+
+.burger {
+    --burger-width: 40px;
+    --burger-height: 30px;
+    --burger-line-height: 4px;
+    position: relative;
+    z-index: 6;
+    border: none;
+    padding: 0;
+    width: var(--burger-width);
+    height: var(--burger-height);
+    color: white;
+    background-color: transparent;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+
+.burger::before,
+.burger::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: var(--burger-line-height);
+    background-color: currentColor;
+    transition: transform 0.3s ease-in-out, top 0.3s ease-in-out;
+}
+
+.burger::before {
+    top: 0;
+}
+
+.burger::after {
+    top: calc(100% - var(--burger-line-height));
+}
+
+.burger__line {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: var(--burger-line-height);
+    background-color: currentColor;
+    transform: translateY(-50%);
+    transition: transform 0.3s ease-in-out;
+}
