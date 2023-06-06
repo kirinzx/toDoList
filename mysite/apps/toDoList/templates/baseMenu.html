@@ -8,11 +8,11 @@
         </button>
     </div>
     <div class="menu-content">
+        <a class="home" href="/">
+            <img src={% static "images/home.svg" %}>
+        </a>
         <a class="profile" href="/profile">
             <img src={% static "images/profile.png" %}>
-        </a>
-        <a class="settings" href="/settings">
-            <img src={% static "images/settings.png" %}>
         </a>
         <a class="logOut" href="{% url 'logout' %}">
             <img src={% static "images/logOut.png" %}>

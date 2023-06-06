@@ -19,6 +19,4 @@ body {
     position: relative;
     background: rgb(2,0,36);
     background: linear-gradient(90deg, rgba(2,0,36,0.7) 0%, rgba(0,224,255,0.9) 25%, rgba(104,49,121,0.9) 75%, rgba(169,81,175,0.7) 100%);
-    align-items: center;
-    justify-content: center;
 }

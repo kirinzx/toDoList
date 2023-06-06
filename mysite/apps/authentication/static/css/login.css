@@ -49,6 +49,7 @@
     flex-direction: column;
     background: white;
     border-radius: 23px;
+    margin: auto;
 }
 
 .wrapper {
